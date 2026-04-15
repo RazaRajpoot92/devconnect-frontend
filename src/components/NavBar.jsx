@@ -6,13 +6,13 @@ const NavBar = () => {
     
         <div className="collapse-title navbar justify-between">
             <div className="navbar-start">
-            <button className="btn btn-ghost text-xl">DesiGhee Scene</button>
+            <button className="btn btn-ghost text-xl">DevConnect</button>
             </div>
 
             <div className="navbar-center  lg:flex">
             <ul className="menu menu-horizontal px-1">
-                <li><button>Item 1</button></li>
-                <li><button>Item 3</button></li>
+                <li><button>Home</button></li>
+                <li><button>Profile</button></li>
             </ul>
             </div>
         
