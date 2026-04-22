@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { addUser } from "./utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleClick = async () => {
     try {
@@ -20,7 +25,9 @@ const Login = () => {
       toast.success(`Welcome ${res.data.data.firstName}, Logged in Successfully`,{
         theme:"dark"
       })
-      console.log(res.data.data.firstName);
+      dispatch(addUser(res.data.data))
+      navigate("/feed")
+      
 
     } catch (err) {
       const msg = err.response?.data?.message || "Something went wrong";

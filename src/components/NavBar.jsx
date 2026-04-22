@@ -1,14 +1,26 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "./utils/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+
+  const user = useSelector((store)=>store.user)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const handleClick = ()=>{
+    dispatch(removeUser())
+    navigate("/login")
+  }
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">DevConnect</a>
+        <a className="btn btn-ghost text-xl text-primary">DevConnect</a>
       </div>
-      <div className="flex gap-2">
-        
+      {user && <div className="flex gap-2 items-center">
+          <p className="text-primary">Welcome, <span className="font-semibold">{user.firstName}</span></p>
         <div className="dropdown dropdown-end">
+
           <div
             tabIndex={0}
             role="button"
@@ -17,7 +29,7 @@ const NavBar = () => {
             <div className="w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src={user.photoUrl}
               />
             </div>
           </div>
@@ -34,12 +46,13 @@ const NavBar = () => {
             <li>
               <a>Settings</a>
             </li>
-            <li>
+            <li onClick={handleClick}>
               <a>Logout</a>
             </li>
           </ul>
         </div>
-      </div>
+        
+      </div>}
     </div>
   );
 };
