@@ -15,7 +15,7 @@ const Login = () => {
       const res = await axios.post("http://localhost:3000/login", {
         email,
         password,
-      });
+      },{withCredentials:true});
 
       toast.success(`Welcome ${res.data.data.firstName}, Logged in Successfully`,{
         theme:"dark"
@@ -25,7 +25,7 @@ const Login = () => {
     } catch (err) {
       const msg = err.response?.data?.message || "Something went wrong";
        
-      console.log(msg);
+     
       toast.error(msg)
     }
   };
