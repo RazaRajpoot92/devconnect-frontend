@@ -1,41 +1,52 @@
-
 import axios from 'axios'
 import Footer from './Footer'
 import NavBar from './NavBar'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { BASE_URL } from './constants/contants'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { addUser } from './utils/userSlice'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 const Body = () => {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const fetchUser = async()=>{
     try{
       const user = await axios.get(`${BASE_URL}/profile/view`, {withCredentials:true})
-      console.log(user.data.userData)
+
       dispatch(addUser(user.data.userData))
     }catch(err){
-      console.log(err)
-      toast.error("Something went wrong")
+      if(err.response.status == 401){
+        
+        navigate("/login")
+      }
+      console.log(err.response)
+      
+      
+      
     }
   
   }
 
   useEffect(()=>{
+    if(location.pathname == "/login") return;
+
     fetchUser()
   },[])
 
 
   return (
-    <div>
-      <ToastContainer />
+    <div className="min-h-screen flex flex-col">
+     
         <NavBar />
-        
-        <Outlet />
+        <div className="flex-1">
+             <Outlet />
+        </div>
+       
         <Footer />
     </div>
   )
