@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useDispatch } from "react-redux";
 import { addUser } from "./utils/userSlice";
 import { useNavigate } from "react-router-dom";
+import {BASE_URL} from "./constants/contants"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
         toast.error("Please enter email and password")
         return
       }
-      const res = await axios.post("http://localhost:3000/login", {
+      const res = await axios.post( `${BASE_URL}/login`, {
         email,
         password,
       },{withCredentials:true});
