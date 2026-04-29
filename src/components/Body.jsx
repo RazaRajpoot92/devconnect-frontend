@@ -19,6 +19,7 @@ const Body = () => {
       const user = await axios.get(`${BASE_URL}/profile/view`, {withCredentials:true})
 
       dispatch(addUser(user.data.userData))
+      navigate("/feed")
     }catch(err){
       if(err.response.status == 401){
         
