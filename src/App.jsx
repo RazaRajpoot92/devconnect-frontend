@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import appStore from './components/utils/appStore'
 
 import FeedPage from './pages/FeedPage'
+import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                   <Route path='/feed' element={<FeedPage />}  />
                   <Route path='/login' element={<Login />}  />
                   <Route path='/signup' element={<SignUp />}  />
+                  <Route path='/edit/profile' element={<EditProfilePage />}/>
               </Route>
           </Routes>
       </BrowserRouter>
