@@ -2,49 +2,52 @@ import React from "react";
 
 const UserCard = ({ feed }) => {
   return (
-    <div className="w-80 bg-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+    <div className="w-80  h-100 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700 hover:border-emerald-500/30">
 
-      {/* Image */}
-      <div className="h-60 w-full overflow-hidden">
-        <img
-          src={feed.photoUrl}
-          alt="profile"
-          className="h-full w-full object-fit hover:scale-105 transition-transform duration-300"
-        />
-      </div>
+  {/* Image */}
+  <div className="relative h-60 group w-full overflow-hidden">
+    <img
+      src={feed.photoUrl}
+      alt="profile"
+      className=" h-full w-full object-fill group-hover:scale-110 transition-transform duration-500"
+    />
 
-      {/* Content */}
-      <div className="p-5 flex flex-col items-center text-center gap-2">
+    {/* Gradient overlay */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 
-        {/* Name */}
-        <h2 className="text-xl font-semibold text-gray-800">
-          {feed.firstName} {feed.lastName}
-        </h2>
-
-        {/* Age + Gender */}
-        <p className="text-sm text-gray-500">
-          {feed.age} • {feed.gender}
-        </p>
-
-        {/* About */}
-        <p className="text-sm text-gray-600 mt-2 line-clamp-3">
-          {feed.about}
-        </p>
-
-        {/* Buttons */}
-        <div className="flex gap-3 mt-4 w-full">
-
-          <button className="flex-1 py-2 rounded-xl bg-pink-500 text-white font-medium hover:bg-pink-600 transition">
-             Interested
-          </button>
-
-          <button className="flex-1 py-2 rounded-xl bg-gray-200 text-gray-700 font-medium hover:bg-gray-300 transition">
-             Ignore
-          </button>
-
-        </div>
-      </div>
+    {/* Name on image */}
+    <div className="absolute bottom-3 left-4 text-white">
+      <h2 className="text-lg font-semibold">
+        {feed.firstName} {feed.lastName}
+      </h2>
+      <p className="text-xs text-gray-300">
+        {feed.age} • {feed.gender}
+      </p>
     </div>
+  </div>
+
+  {/* Content */}
+  <div className="p-5 flex flex-col gap-3">
+
+    {/* About */}
+    <p className="text-sm text-gray-300 leading-relaxed line-clamp-3">
+      {feed.about}
+    </p>
+
+    {/* Buttons */}
+    <div className="flex gap-3 mt-2">
+
+      <button className="flex-1 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300">
+        Interested
+      </button>
+
+      <button className="flex-1 py-2 rounded-xl bg-gray-700 text-gray-300 font-medium hover:bg-gray-600 hover:text-white transition-all duration-300">
+        Ignore
+      </button>
+
+    </div>
+  </div>
+</div>
   );
 };
 
