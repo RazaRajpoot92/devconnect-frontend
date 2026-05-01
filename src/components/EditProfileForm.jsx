@@ -1,22 +1,25 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { BASE_URL } from './constants/contants'
+import { useDispatch } from 'react-redux'
+import { addUser } from './utils/userSlice'
 
 const EditProfileForm = ({user, methods}) => {
  
+  const dispatch = useDispatch()
   
   const updateProfile = async()=>{
     try {
-       const res = axios.patch(`${BASE_URL}/profile/edit`, {
-          firstName,
-          lastName,
-          photoUrl,
-          about,
-          age,
+       const res = await axios.patch(`${BASE_URL}/profile/edit`, {
+          firstName:user.firstName,
+          lastName:user.firstName,
+          photoUrl:user.photoUrl,
+          about:user.about,
+          age:user.age,
         }, {withCredentials:true})
 
-        console.log(res.data)
-
+      
+        dispatch(addUser(res.data.data))
     } catch (error) {
       
     }
