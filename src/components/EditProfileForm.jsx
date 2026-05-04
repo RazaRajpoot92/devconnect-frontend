@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { BASE_URL } from './constants/contants'
 import { useDispatch } from 'react-redux'
 import { addUser } from './utils/userSlice'
+import { toast, ToastContainer } from 'react-toastify'
 
 const EditProfileForm = ({user, methods}) => {
  
@@ -12,7 +13,7 @@ const EditProfileForm = ({user, methods}) => {
     try {
        const res = await axios.patch(`${BASE_URL}/profile/edit`, {
           firstName:user.firstName,
-          lastName:user.firstName,
+          lastName:user.lastName,
           photoUrl:user.photoUrl,
           about:user.about,
           age:user.age,
@@ -20,13 +21,15 @@ const EditProfileForm = ({user, methods}) => {
 
       
         dispatch(addUser(res.data.data))
+        toast.success("Profile has been saved!")
     } catch (error) {
       
     }
   }
 
   return (
-    <div className="card card-border bg-base-100 w-96  border border-black">
+    <div className="card card-border bg-base-100 w-96  border border-gray-700">
+      <ToastContainer position='top-center' theme='dark' />
       <div className="card-body  text-center">
       <h2 className="font-bold text-2xl text-center text-gray-300 ">Edit Profile</h2>
 

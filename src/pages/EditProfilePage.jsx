@@ -31,12 +31,12 @@ const EditProfilePage = () => {
   return (
     !user?<p>Loading...</p>:<div className='my-10'>
         
-    <h1>Edit Profile</h1>
+   
 
     <br />
-    <div className='flex justify-around items-center'>
+    <div className='flex justify-center gap-15 items-center'>
       <EditProfileForm user={currUser} methods={userMethods} />
-      <UserCard feed={currUser} />
+      <UserCard disable = {true} feed={currUser} />
     </div>
     
     </div>

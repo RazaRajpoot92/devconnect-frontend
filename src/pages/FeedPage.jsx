@@ -30,7 +30,7 @@ const FeedPage = () => {
 
   return (
     <div className='flex justify-center my-5'>
-        {feed && <UserCard feed = {feed[5]} />}
+        {feed && <UserCard disable={false} feed = {feed[0]} />}
     </div>)
   
 }

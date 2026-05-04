@@ -1,6 +1,7 @@
 import React from "react";
 
-const UserCard = ({ feed }) => {
+const UserCard = ({ feed, disable }) => {
+  
   return (
     <div className="w-80  h-100 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700 hover:border-emerald-500/30">
 
@@ -37,13 +38,24 @@ const UserCard = ({ feed }) => {
     {/* Buttons */}
     <div className="flex gap-3 mt-2">
 
-      <button className="flex-1 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-300">
-        Interested
-      </button>
+<button
+  disabled={disable}
+  className={`flex-1 py-2 rounded-xl font-medium transition-all duration-300
+  bg-gradient-to-r from-emerald-500 to-teal-500 text-white
+  hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/30
+  disabled:opacity-50 disabled:cursor-default disabled:hover:scale-100 disabled:hover:shadow-none`}
+>
+  Interested
+    </button>
 
-      <button className="flex-1 py-2 rounded-xl bg-gray-700 text-gray-300 font-medium hover:bg-gray-600 hover:text-white transition-all duration-300">
-        Ignore
-      </button>
+        <button
+      disabled={disable}
+      className="flex-1 py-2 rounded-xl bg-gray-700 text-gray-300 font-medium 
+      hover:bg-gray-600 hover:text-white transition-all duration-300
+      disabled:opacity-50 disabled:cursor-default disabled:hover:bg-gray-700 disabled:hover:text-gray-300"
+    >
+      Ignore
+    </button>
 
     </div>
   </div>

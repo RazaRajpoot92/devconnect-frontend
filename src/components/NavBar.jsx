@@ -28,8 +28,9 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="flex-1">
-        <Link to='/' className="btn btn-ghost text-xl text-primary">DevConnect</Link>
+        <Link to='/feed' className="btn btn-ghost text-xl text-primary">DevConnect</Link>
       </div>
+     
       {user && <div className="flex gap-2 items-center">
           <p className="text-primary">Welcome, <span className="font-semibold">{user.firstName}</span></p>
         <div className="dropdown dropdown-end">
@@ -57,7 +58,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <a>Settings</a>
+              <Link to={'/connections'}>Connections</Link>
             </li>
             <li onClick={handleLogout}>
               <a>Logout</a>
