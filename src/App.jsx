@@ -11,6 +11,7 @@ import appStore from './components/utils/appStore'
 import FeedPage from './pages/FeedPage'
 import EditProfilePage from './pages/EditProfilePage'
 import ConnectionsPage from './pages/ConnectionsPage'
+import RequestPage from './pages/RequestPage'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                   <Route path='/signup' element={<SignUp />}  />
                   <Route path='/edit/profile' element={<EditProfilePage />}/>
                   <Route path='/connections' element={<ConnectionsPage />}/>
+                  <Route path='/connections/request' element = {<RequestPage />} />
               </Route>
           </Routes>
       </BrowserRouter>
