@@ -2,7 +2,9 @@ import React from 'react'
 
 const RequestPage = () => {
   return (
-    <div>RequestPage</div>
+    <div>
+      <h2>Request Recieved</h2>
+    </div>
   )
 }
 
