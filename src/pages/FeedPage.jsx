@@ -27,7 +27,7 @@ const FeedPage = () => {
   }, [])
 
 //  console.log(feed)
-  if(!feed) return <h1>Something went wrong.</h1>
+  if(!feed) return <h1 className='text-center text-lg'>Loading....</h1>
   if(feed.length ==0 ) return <h1>No more new users, try again later</h1>
   return (
     <div className='flex justify-center my-5'>

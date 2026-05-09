@@ -1,9 +1,27 @@
+import axios from "axios";
 import React from "react";
+import { BASE_URL } from "./constants/contants";
+import { useDispatch } from "react-redux";
+import { removeUserFromFeed } from "./utils/feedSlice";
 
 const UserCard = ({ feed, disable }) => {
+
+  const dispatch = useDispatch()
+
+  const handleRequest = async (status, id)=>{
+    try {
+      await axios.post(`${BASE_URL}/request/send/${status}/${id}`, {}, {withCredentials:true})
+      
+      dispatch(removeUserFromFeed(id))
+
+    } catch (error) {
+      console.log(error.message)
+    }
+    
+  }
   
   return (
-    <div className="w-80  h-100 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700 hover:border-emerald-500/30">
+    <div className="w-80  h-100 bg-linear-to-br from-gray-900 to-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-700 hover:border-emerald-500/30">
 
   {/* Image */}
   <div className="relative h-60 group w-full overflow-hidden">
@@ -39,6 +57,7 @@ const UserCard = ({ feed, disable }) => {
     <div className="flex gap-3 mt-2">
 
 <button
+  onClick={()=>handleRequest("interested",feed._id)}
   disabled={disable}
   className={`flex-1 hover:cursor-pointer py-2 rounded-xl font-medium transition-all duration-300
   bg-gradient-to-r from-emerald-500 to-teal-500 text-white
@@ -49,6 +68,7 @@ const UserCard = ({ feed, disable }) => {
     </button>
 
         <button
+        onClick={()=>handleRequest("ignored",feed._id)}
       disabled={disable}
       className="flex-1 hover:cursor-pointer py-2 rounded-xl bg-gray-700 text-gray-300 font-medium 
       hover:bg-gray-600 hover:text-white transition-all duration-300
