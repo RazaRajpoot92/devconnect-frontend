@@ -27,10 +27,11 @@ const FeedPage = () => {
   }, [])
 
 //  console.log(feed)
-
+  if(!feed) return <h1>Something went wrong.</h1>
+  if(feed.length ==0 ) return <h1>No more new users, try again later</h1>
   return (
     <div className='flex justify-center my-5'>
-        {feed && <UserCard disable={false} feed = {feed[0]} />}
+        {<UserCard disable={false} feed = {feed[0]} />}
     </div>)
   
 }
