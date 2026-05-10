@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 import {BASE_URL} from "./constants/contants"
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -41,11 +44,71 @@ const Login = () => {
   return (
     <div className="flex justify-center my-5 ">
       <ToastContainer/>
-      <div className="card card-border bg-primary w-96 h-80">
+      <div className="card card-border bg-primary w-96">
         <div className="card-body flex flex-col items-center gap-4">
           <h1 className="text-3xl text-center font-semibold mb-3">Login</h1>
-          {/* email */}
+          
+          <div>
+            
+          </div>
 
+          <>
+            {/* Firstname */}
+            <label className="input ">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </g>
+              </svg>
+              <input
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                type="text"
+                placeholder="Enter your first name"
+                required
+              />
+            </label>
+
+            {/* Firstname */}
+            <label className="input ">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </g>
+              </svg>
+              <input
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                type="text"
+                placeholder="Enter your last name"
+                required
+              />
+            </label>
+          </>
+          
+          {/* email */}
           <label className="input ">
             <svg
               className="h-[1em] opacity-50"
@@ -73,7 +136,6 @@ const Login = () => {
           </label>
 
           {/* Password */}
-
           <label className="input ">
             <svg
               className="h-[1em] opacity-50"
