@@ -21,7 +21,7 @@ const EditProfileForm = ({user, methods}) => {
           gender:user.gender
         }, {withCredentials:true})
 
-        dispatch(clearFeed())
+        
         dispatch(addUser(res.data.data))
         toast.success("Profile has been saved!")
     } catch (error) {
