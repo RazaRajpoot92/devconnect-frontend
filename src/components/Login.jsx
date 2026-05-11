@@ -5,17 +5,19 @@ import { useDispatch } from "react-redux";
 import { addUser } from "./utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import {BASE_URL} from "./constants/contants"
+import { clearFeed } from "./utils/feedSlice";
 
 const Login = () => {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [isLoginForm, setIsLoginForm] = useState(false)
   
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleClick = async () => {
+  const handleLogin = async () => {
     try {
       if(email == "" || password ==""){
         toast.error("Please enter email and password")
@@ -29,30 +31,47 @@ const Login = () => {
       toast.success(`Welcome ${res.data.data.firstName}, Logged in Successfully`,{
         theme:"dark"
       })
+
+      dispatch(clearFeed())
       dispatch(addUser(res.data.data))
       navigate("/feed")
       
 
     } catch (err) {
       const msg = err.response?.data?.message || "Something went wrong";
-       
-     
       toast.error(msg)
     }
   };
+
+  const handleSignUp = async ()=>{
+    try{
+      const user =  await axios.post(`${BASE_URL}/signup`,{
+      firstName,lastName,email,password,
+      },{withCredentials:true})
+
+      dispatch(addUser(user.data.data))
+      toast.success("Sign Up successfully.")
+      navigate('/edit/profile')
+      toast("Please complete your profile.")
+    }catch(err){
+      let msg = err.response?.data?.message || "Something went wrong";
+      toast.error(msg)
+    }
+   
+  }
 
   return (
     <div className="flex justify-center my-5 ">
       <ToastContainer/>
       <div className="card card-border bg-primary w-96">
         <div className="card-body flex flex-col items-center gap-4">
-          <h1 className="text-3xl text-center font-semibold mb-3">Login</h1>
+          <h1 className="text-3xl text-center font-semibold mb-3">{isLoginForm?"Login":"Sign Up"}</h1>
           
           <div>
             
           </div>
 
-          <>
+          { isLoginForm ||<>
             {/* Firstname */}
             <label className="input ">
               <svg
@@ -106,7 +125,7 @@ const Login = () => {
                 required
               />
             </label>
-          </>
+          </>}
           
           {/* email */}
           <label className="input ">
@@ -165,11 +184,20 @@ const Login = () => {
             />
           </label>
 
-          <div className="card-actions justify-center mt-5">
-            <button onClick={handleClick} className="btn btn-neutral w-30 ">
-              Login
+          <div className="card-actions justify-center mt-3">
+            <button onClick={isLoginForm?handleLogin:handleSignUp} className="btn btn-neutral w-30 ">
+             {isLoginForm?"Login":"Sign Up"}
             </button>
           </div>
+          <>
+           
+          {isLoginForm?<p>Dont have an account? <span onClick={()=>setIsLoginForm(val => !val)} className="underline cursor-pointer">Sign up here</span></p>:
+          <p>Already have an account? <span onClick={()=>setIsLoginForm(val => !val)} className="underline cursor-pointer">Login here</span></p>
+          
+          }
+
+          </>
+        
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { BASE_URL } from './constants/contants'
 import { useDispatch } from 'react-redux'
 import { addUser } from './utils/userSlice'
 import { toast, ToastContainer } from 'react-toastify'
+import { clearFeed } from './utils/feedSlice'
 
 const EditProfileForm = ({user, methods}) => {
  
@@ -17,9 +18,10 @@ const EditProfileForm = ({user, methods}) => {
           photoUrl:user.photoUrl,
           about:user.about,
           age:user.age,
+          gender:user.gender
         }, {withCredentials:true})
 
-      
+        dispatch(clearFeed())
         dispatch(addUser(res.data.data))
         toast.success("Profile has been saved!")
     } catch (error) {
